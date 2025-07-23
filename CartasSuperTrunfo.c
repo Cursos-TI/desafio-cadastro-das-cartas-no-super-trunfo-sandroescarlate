@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <string.h> // Para a função strcspn, útil ao usar fgets para remover o '\n' 
+#include <stdio.h>  // Necessário para as funções printf() e scanf() [cite: 399]
+#include <string.h> // Necessário para a função strcspn() [cite: 392]
 
 // Desafio Super Trunfo - Países
 // Tema 1 - Cadastro das Cartas
@@ -8,27 +8,16 @@
 //Teste Sandro Escarlate
 
 int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
-    
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
-
-    // --- Declaração de variáveis para a Carta 1 ---
+    // --- Declaração de variáveis para a PRIMEIRA Carta ---
     char estado1;
-    char codigoCarta1[5]; // Ex: A01 (3 caracteres) + '\0' (1 caractere) = 4, mas 5 para segurança [cite: 395]
-    char nomeCidade1[50]; // Tamanho suficiente para o nome da cidade [cite: 395]
+    char codigoCarta1[5]; // Espaço para 3 caracteres (ex: A01) + o nulo terminador '\0' [cite: 395]
+    char nomeCidade1[50]; // Espaço para o nome da cidade (até 49 caracteres + '\0') [cite: 395]
     int populacao1;
     float area1;
     float pib1;
     int pontosTuristicos1;
 
-    // --- Declaração de variáveis para a Carta 2 ---
+    // --- Declaração de variáveis para a SEGUNDA Carta ---
     char estado2;
     char codigoCarta2[5];
     char nomeCidade2[50];
@@ -38,82 +27,99 @@ int main() {
     int pontosTuristicos2;
 
     // --- ENTRADA DE DADOS PARA A CARTA 1 ---
-    printf("--- Cadastro da Carta 1 ---\n");
+    printf("--- Cadastro da Carta 1 ---\n"); // Mensagem para o usuario [cite: 408]
 
+    // Leitura do Estado (char)
     printf("Estado (A-H): ");
-    scanf(" %c", &estado1); // O espaço antes de %c é para consumir qualquer '\n' pendente [cite: 467, 468]
-
-    // Limpar o buffer de entrada após scanf para char ou int, antes de usar fgets [cite: 483]
+    // O espaco antes de %c eh crucial para consumir o '\n' de uma entrada anterior [cite: 467, 468]
+    scanf(" %c", &estado1);
+    // Limpa o buffer de entrada apos scanf() para evitar problemas com fgets() 
     while (getchar() != '\n'); 
 
+    // Leitura do Codigo da Carta (string)
     printf("Codigo da Carta (ex: A01): ");
-    // Usar fgets para ler strings com espaços, por exemplo, se o codigo da carta tiver algo complexo no futuro 
-    fgets(codigoCarta1, sizeof(codigoCarta1), stdin); 
-    codigoCarta1[strcspn(codigoCarta1, "\n")] = 0; // Remove o '\n' lido por fgets 
+    // fgets() eh usado para ler a linha inteira, incluindo espacos 
+    fgets(codigoCarta1, sizeof(codigoCarta1), stdin);
+    // strcspn() remove o caractere de nova linha '\n' que fgets() pode incluir [cite: 494]
+    codigoCarta1[strcspn(codigoCarta1, "\n")] = 0;
 
+    // Leitura do Nome da Cidade (string)
     printf("Nome da Cidade: ");
     fgets(nomeCidade1, sizeof(nomeCidade1), stdin);
     nomeCidade1[strcspn(nomeCidade1, "\n")] = 0;
 
+    // Leitura da Populacao (int)
     printf("Populacao: ");
     scanf("%d", &populacao1);
-    while (getchar() != '\n'); // Limpar o buffer
+    while (getchar() != '\n'); // Limpa o buffer
 
+    // Leitura da Area (float)
     printf("Area (em km2): ");
     scanf("%f", &area1);
-    while (getchar() != '\n'); // Limpar o buffer
+    while (getchar() != '\n'); // Limpa o buffer
 
+    // Leitura do PIB (float)
     printf("PIB (em bilhoes de reais): ");
     scanf("%f", &pib1);
-    while (getchar() != '\n'); // Limpar o buffer
+    while (getchar() != '\n'); // Limpa o buffer
 
+    // Leitura do Numero de Pontos Turisticos (int)
     printf("Numero de Pontos Turisticos: ");
     scanf("%d", &pontosTuristicos1);
-    while (getchar() != '\n'); // Limpar o buffer
+    while (getchar() != '\n'); // Limpa o buffer
 
-    printf("\n"); // Adiciona uma linha em branco para separar as entradas [cite: 249]
+    printf("\n"); // Adiciona uma linha em branco para melhor legibilidade [cite: 249]
 
     // --- ENTRADA DE DADOS PARA A CARTA 2 ---
-    printf("--- Cadastro da Carta 2 ---\n");
+    printf("--- Cadastro da Carta 2 ---\n"); // Mensagem para o usuario
 
+    // Leitura do Estado (char)
     printf("Estado (A-H): ");
     scanf(" %c", &estado2);
     while (getchar() != '\n'); 
 
+    // Leitura do Codigo da Carta (string)
     printf("Codigo da Carta (ex: B02): ");
     fgets(codigoCarta2, sizeof(codigoCarta2), stdin);
     codigoCarta2[strcspn(codigoCarta2, "\n")] = 0;
 
+    // Leitura do Nome da Cidade (string)
     printf("Nome da Cidade: ");
     fgets(nomeCidade2, sizeof(nomeCidade2), stdin);
     nomeCidade2[strcspn(nomeCidade2, "\n")] = 0;
 
+    // Leitura da Populacao (int)
     printf("Populacao: ");
     scanf("%d", &populacao2);
     while (getchar() != '\n');
 
+    // Leitura da Area (float)
     printf("Area (em km2): ");
     scanf("%f", &area2);
     while (getchar() != '\n');
 
+    // Leitura do PIB (float)
     printf("PIB (em bilhoes de reais): ");
     scanf("%f", &pib2);
     while (getchar() != '\n');
 
+    // Leitura do Numero de Pontos Turisticos (int)
     printf("Numero de Pontos Turisticos: ");
     scanf("%d", &pontosTuristicos2);
     while (getchar() != '\n');
 
-    printf("\n"); // Adiciona uma linha em branco [cite: 249]
+    printf("\n"); // Adiciona uma linha em branco
 
     // --- EXIBIÇÃO DE DADOS PARA A CARTA 1 ---
-    printf("Estado: %c\n", estado1);
-    printf("Codigo: %s\n", codigoCarta1);
-    printf("Nome da Cidade: %s\n", nomeCidade1);
-    printf("Populacao: %d\n", populacao1);
-    printf("Area: %.2f km2\n", area1); // %.2f para 2 casas decimais
+    printf("--- Informacoes da Carta 1 ---\n");
+    printf("Estado: %c\n", estado1); // Exibe o caractere [cite: 431, 444, 445, 446]
+    printf("Codigo: %s\n", codigoCarta1); // Exibe a string [cite: 432]
+    printf("Nome da Cidade: %s\n", nomeCidade1); // Exibe a string [cite: 432]
+    printf("Populacao: %d\n", populacao1); // Exibe o inteiro [cite: 427, 438, 439]
+    // %.2f formata o float para 2 casas decimais 
+    printf("Area: %.2f km2\n", area1); 
     printf("PIB: %.2f bilhoes de reais\n", pib1);
-    printf("Numero de Pontos Turisticos: %d\n", pontosTuristicos1);
+    printf("Numero de Pontos Turisticos: %d\n", pontosTuristicos1); // Exibe o inteiro [cite: 427]
 
     printf("\n"); // Adiciona uma linha em branco [cite: 249]
 
